@@ -1,0 +1,286 @@
+openapi: 3.0.3
+info:
+  title: Reve API
+  version: 1.0.0
+  description: Manual OpenAPI specification based on the official Reve SDK for image generation, remixing, editing, balance checks, and image effects.
+servers:
+  - url: https://api.reve.com
+security:
+  - BearerAuth: []
+paths:
+  /v1/image/create/:
+    post:
+      operationId: createImage
+      summary: Generate an image from a text prompt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateImageRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '402':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+  /v1/image/remix/:
+    post:
+      operationId: remixImage
+      summary: Generate a new image by remixing reference images with a text prompt.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemixImageRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '402':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+  /v1/image/edit/:
+    post:
+      operationId: editImage
+      summary: Edit an image with a natural-language instruction.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditImageRequest'
+      responses:
+        '200':
+          $ref: '#/components/responses/ImageResponse'
+        '400':
+          $ref: '#/components/responses/ErrorResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+        '402':
+          $ref: '#/components/responses/ErrorResponse'
+        '429':
+          $ref: '#/components/responses/ErrorResponse'
+  /api/misc/balance/:
+    get:
+      operationId: getBalance
+      summary: Get the current Reve credit balance.
+      responses:
+        '200':
+          description: Current balance.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BalanceResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+  /v1/image/effect/:
+    get:
+      operationId: listEffects
+      summary: List available image post-processing effects.
+      parameters:
+        - name: source
+          in: query
+          required: false
+          schema:
+            $ref: '#/components/schemas/EffectSource'
+      responses:
+        '200':
+          description: Available effects.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EffectsResponse'
+        '401':
+          $ref: '#/components/responses/ErrorResponse'
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  responses:
+    ImageResponse:
+      description: Generated PNG image.
+      headers:
+        x-reve-request-id:
+          schema:
+            type: string
+        x-reve-credits-used:
+          schema:
+            type: integer
+        x-reve-credits-remaining:
+          schema:
+            type: integer
+        x-reve-version:
+          schema:
+            type: string
+        x-reve-content-violation:
+          schema:
+            type: boolean
+      content:
+        image/png:
+          schema:
+            type: string
+            format: binary
+    ErrorResponse:
+      description: Reve API error.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    CreateImageRequest:
+      type: object
+      required:
+        - prompt
+      additionalProperties: true
+      properties:
+        prompt:
+          type: string
+          description: Text description of the image to generate.
+        aspect_ratio:
+          $ref: '#/components/schemas/AspectRatio'
+        version:
+          type: string
+          description: Reve model version, or latest.
+          default: latest
+        test_time_scaling:
+          type: integer
+          description: Quality level from 1 to 5.
+          minimum: 1
+          maximum: 5
+        postprocessing:
+          type: array
+          description: Optional post-processing operation descriptors.
+          items:
+            type: object
+            additionalProperties: true
+    RemixImageRequest:
+      type: object
+      required:
+        - prompt
+        - reference_images
+      additionalProperties: true
+      properties:
+        prompt:
+          type: string
+          description: Text prompt describing the desired output.
+        reference_images:
+          type: array
+          description: Base64-encoded reference images.
+          items:
+            type: string
+        aspect_ratio:
+          $ref: '#/components/schemas/AspectRatio'
+        version:
+          type: string
+          description: Reve model version, or latest.
+          default: latest
+        test_time_scaling:
+          type: integer
+          description: Quality level from 1 to 5.
+          minimum: 1
+          maximum: 5
+        postprocessing:
+          type: array
+          description: Optional post-processing operation descriptors.
+          items:
+            type: object
+            additionalProperties: true
+    EditImageRequest:
+      type: object
+      required:
+        - edit_instruction
+        - reference_image
+      additionalProperties: true
+      properties:
+        edit_instruction:
+          type: string
+          description: Natural-language edit instruction.
+        reference_image:
+          type: string
+          description: Base64-encoded source image.
+        aspect_ratio:
+          $ref: '#/components/schemas/AspectRatio'
+        version:
+          type: string
+          description: Reve model version, or latest.
+          default: latest
+        test_time_scaling:
+          type: integer
+          description: Quality level from 1 to 5.
+          minimum: 1
+          maximum: 5
+        postprocessing:
+          type: array
+          description: Optional post-processing operation descriptors.
+          items:
+            type: object
+            additionalProperties: true
+    AspectRatio:
+      type: string
+      enum:
+        - '16:9'
+        - '3:2'
+        - '4:3'
+        - '1:1'
+        - '3:4'
+        - '2:3'
+        - '9:16'
+        - auto
+    EffectSource:
+      type: string
+      enum:
+        - all
+        - project
+        - preset
+    EffectsResponse:
+      type: object
+      properties:
+        effects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Effect'
+    Effect:
+      type: object
+      additionalProperties: true
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        source:
+          type: string
+        category:
+          type: string
+    BalanceResponse:
+      type: object
+      additionalProperties: true
+      properties:
+        budget_id:
+          type: string
+        new_balance:
+          type: number
+          format: double
+    Error:
+      type: object
+      additionalProperties: true
+      properties:
+        message:
+          type: string
+        error:
+          type: string
+        error_code:
+          type: string
+        instance_id:
+          type: string

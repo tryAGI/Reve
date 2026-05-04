@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Label="Nuget">
+    <Description>C# SDK for the Reve image generation API.</Description>
+    <PackageTags>api;client;sdk;dotnet;openapi;generated;image-generation;image-editing;reve</PackageTags>
+  </PropertyGroup>
+
+</Project>
