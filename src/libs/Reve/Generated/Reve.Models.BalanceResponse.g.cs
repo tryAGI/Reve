@@ -48,5 +48,6 @@ namespace Reve
         public BalanceResponse()
         {
         }
+
     }
 }
