@@ -10,3 +10,20 @@ autosdk generate openapi.yaml \
   --output Generated \
   --security-scheme Http:Header:Bearer \
   --exclude-deprecated-operations
+
+rm -rf ../../cli/Reve.CLI
+
+autosdk cli-project openapi.yaml \
+  --output ../../cli/Reve.CLI \
+  --sdk-project ../../libs/Reve/Reve.csproj \
+  --targetFramework net10.0 \
+  --namespace Reve \
+  --clientClassName ReveClient \
+  --package-id Reve.CLI \
+  --tool-command-name reve \
+  --user-secrets-id Reve.CLI \
+  --api-key-env-var REVE_API_KEY \
+  --base-url-env-var REVE_BASE_URL \
+  --cli-credential-file \
+  --exclude-deprecated-operations \
+  --security-scheme Http:Header:Bearer
