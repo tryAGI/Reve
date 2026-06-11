@@ -40,6 +40,13 @@ using Reve;
 using var client = new ReveClient(apiKey);
 ```
 
+### CLI
+
+```bash
+dotnet tool install --global Reve.CLI --prerelease
+reve api --help
+```
+
 <!-- EXAMPLES:START -->
 ### Create image
 Generate an image from a text prompt.
