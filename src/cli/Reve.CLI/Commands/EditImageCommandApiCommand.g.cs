@@ -97,10 +97,10 @@ internal static partial class EditImageCommandApiCommand
                             cancellationToken).ConfigureAwait(false);
                         var editInstruction = parseResult.GetRequiredValue(EditInstruction);
                         var referenceImage = parseResult.GetRequiredValue(ReferenceImage);
-                        var aspectRatio = CliRuntime.WasSpecified(parseResult, AspectRatio) ? parseResult.GetValue(AspectRatio) : __requestBase is not null ? __requestBase.AspectRatio : default;
-                        var version = CliRuntime.WasSpecified(parseResult, Version) ? parseResult.GetValue(Version) : __requestBase is not null ? __requestBase.Version : default;
-                        var testTimeScaling = CliRuntime.WasSpecified(parseResult, TestTimeScaling) ? parseResult.GetValue(TestTimeScaling) : __requestBase is not null ? __requestBase.TestTimeScaling : default;
-                        var postprocessing = CliRuntime.WasSpecified(parseResult, Postprocessing) ? parseResult.GetValue(Postprocessing) : __requestBase is not null ? __requestBase.Postprocessing : default;
+                        var aspectRatio = CliRuntime.WasSpecified(parseResult, AspectRatio) ? parseResult.GetValue(AspectRatio) : (__requestBase is { } __AspectRatioBaseValue ? __AspectRatioBaseValue.AspectRatio : default);
+                        var version = CliRuntime.WasSpecified(parseResult, Version) ? parseResult.GetValue(Version) : (__requestBase is { } __VersionBaseValue ? __VersionBaseValue.Version : default);
+                        var testTimeScaling = CliRuntime.WasSpecified(parseResult, TestTimeScaling) ? parseResult.GetValue(TestTimeScaling) : (__requestBase is { } __TestTimeScalingBaseValue ? __TestTimeScalingBaseValue.TestTimeScaling : default);
+                        var postprocessing = CliRuntime.WasSpecified(parseResult, Postprocessing) ? parseResult.GetValue(Postprocessing) : (__requestBase is { } __PostprocessingBaseValue ? __PostprocessingBaseValue.Postprocessing : default);
                 using var client = await CliRuntime.CreateClientAsync(parseResult, cancellationToken).ConfigureAwait(false);
 
 
