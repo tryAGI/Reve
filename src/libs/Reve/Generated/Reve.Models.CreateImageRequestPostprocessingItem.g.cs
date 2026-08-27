@@ -4,7 +4,7 @@
 namespace Reve
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class CreateImageRequestPostprocessingItem
     {

@@ -4,12 +4,12 @@
 namespace Reve
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class EffectsResponse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("effects")]
         public global::System.Collections.Generic.IList<global::Reve.Effect>? Effects { get; set; }
