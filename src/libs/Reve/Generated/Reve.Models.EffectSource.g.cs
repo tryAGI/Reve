@@ -4,20 +4,20 @@
 namespace Reve
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public enum EffectSource
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         All,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Preset,
         /// <summary>
-        /// 
+        ///
         /// </summary>
         Project,
     }

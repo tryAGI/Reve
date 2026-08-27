@@ -4,18 +4,18 @@
 namespace Reve
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class BalanceResponse
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("budget_id")]
         public string? BudgetId { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("new_balance")]
         public double? NewBalance { get; set; }

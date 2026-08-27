@@ -4,7 +4,7 @@
 namespace Reve
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class EditImageRequest
     {
@@ -23,7 +23,7 @@ namespace Reve
         public required string ReferenceImage { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("aspect_ratio")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Reve.JsonConverters.AspectRatioJsonConverter))]

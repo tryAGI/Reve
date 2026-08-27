@@ -20,7 +20,7 @@ namespace Reve.JsonConverters
                     {
                         return global::Reve.EffectSourceExtensions.ToEnum(stringValue);
                     }
-                    
+
                     break;
                 }
                 case global::System.Text.Json.JsonTokenType.Number:

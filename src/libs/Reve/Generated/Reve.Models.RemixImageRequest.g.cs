@@ -4,7 +4,7 @@
 namespace Reve
 {
     /// <summary>
-    /// 
+    ///
     /// </summary>
     public sealed partial class RemixImageRequest
     {
@@ -23,7 +23,7 @@ namespace Reve
         public required global::System.Collections.Generic.IList<string> ReferenceImages { get; set; }
 
         /// <summary>
-        /// 
+        ///
         /// </summary>
         [global::System.Text.Json.Serialization.JsonPropertyName("aspect_ratio")]
         [global::System.Text.Json.Serialization.JsonConverter(typeof(global::Reve.JsonConverters.AspectRatioJsonConverter))]
