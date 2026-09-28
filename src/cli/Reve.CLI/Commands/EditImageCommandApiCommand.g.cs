@@ -61,6 +61,8 @@ internal static partial class EditImageCommandApiCommand
           Hidden = true,
       };
 
+    static partial void CustomizeCommand(ref Command command);
+
     public static Command Create()
     {
         var command = new Command(@"edit-image", @"Edit an image with a natural-language instruction.");
@@ -115,6 +117,7 @@ internal static partial class EditImageCommandApiCommand
 
                                 await CliRuntime.WriteBinaryAsync(parseResult, response, cancellationToken).ConfigureAwait(false);
             }, cancellationToken).ConfigureAwait(false));
+        CustomizeCommand(ref command);
         return command;
     }
 }
