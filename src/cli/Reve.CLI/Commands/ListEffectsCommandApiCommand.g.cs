@@ -35,9 +35,9 @@ internal static partial class ListEffectsCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"list-effects", @"List available image post-processing effects.");
+        var command = new Command(commandName ?? @"list-effects", @"List available image post-processing effects.");
                         command.Options.Add(Source);
 
 

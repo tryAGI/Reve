@@ -63,9 +63,9 @@ internal static partial class EditImageCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"edit-image", @"Edit an image with a natural-language instruction.");
+        var command = new Command(commandName ?? @"edit-image", @"Edit an image with a natural-language instruction.");
                         command.Options.Add(EditInstruction);
                         command.Options.Add(ReferenceImage);
                         command.Options.Add(AspectRatio);

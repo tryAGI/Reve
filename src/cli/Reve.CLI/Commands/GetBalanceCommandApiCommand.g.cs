@@ -31,9 +31,9 @@ internal static partial class GetBalanceCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"get-balance", @"Get the current Reve credit balance.");
+        var command = new Command(commandName ?? @"get-balance", @"Get the current Reve credit balance.");
 
 
 
