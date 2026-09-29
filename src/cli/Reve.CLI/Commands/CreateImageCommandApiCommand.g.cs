@@ -56,9 +56,9 @@ internal static partial class CreateImageCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"create-image", @"Generate an image from a text prompt.");
+        var command = new Command(commandName ?? @"create-image", @"Generate an image from a text prompt.");
                         command.Options.Add(Prompt);
                         command.Options.Add(AspectRatio);
                         command.Options.Add(Version);

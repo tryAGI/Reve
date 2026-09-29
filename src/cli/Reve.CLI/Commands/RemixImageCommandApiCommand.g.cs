@@ -63,9 +63,9 @@ internal static partial class RemixImageCommandApiCommand
 
     static partial void CustomizeCommand(ref Command command);
 
-    public static Command Create()
+    public static Command Create(string? commandName = null)
     {
-        var command = new Command(@"remix-image", @"Generate a new image by remixing reference images with a text prompt.");
+        var command = new Command(commandName ?? @"remix-image", @"Generate a new image by remixing reference images with a text prompt.");
                         command.Options.Add(Prompt);
                         command.Options.Add(ReferenceImages);
                         command.Options.Add(AspectRatio);
