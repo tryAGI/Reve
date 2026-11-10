@@ -18,7 +18,7 @@ namespace Reve.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Reve.EffectSourceExtensions.ToEnum(stringValue) ?? default;
+                        return global::Reve.EffectSourceExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Reve.EffectSource.");
                     }
 
                     break;

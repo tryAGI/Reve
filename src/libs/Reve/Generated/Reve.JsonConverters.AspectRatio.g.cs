@@ -18,7 +18,7 @@ namespace Reve.JsonConverters
                     var stringValue = reader.GetString();
                     if (stringValue != null)
                     {
-                        return global::Reve.AspectRatioExtensions.ToEnum(stringValue) ?? default;
+                        return global::Reve.AspectRatioExtensions.ToEnum(stringValue) ?? throw new global::System.Text.Json.JsonException($"Unknown value '{stringValue}' for global::Reve.AspectRatio.");
                     }
 
                     break;
